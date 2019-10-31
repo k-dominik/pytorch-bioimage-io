@@ -1,0 +1,33 @@
+name: BCELoss
+description: Binary cross entropy loss
+cite:
+    text: TODO
+    doi: TODO
+
+format_version: 0.1.0
+language: python
+framework: pytorch
+authors:
+    - Constantin Pape
+documentation: bce_loss.md
+tags: [loss, binary cross entropy]
+
+dependencies: ../../env_pytorch.yaml
+
+source: torch.nn.BCELoss
+
+inputs:  # optional: needed if input tensor restrictions apply
+    - name: input
+      data_type: float32
+      data_range: [0, 1]
+      # axes: null   we don't care about the axes here, so this should be optional
+    - name: target
+      data_type: float32
+      data_range: [0, 1]
+      # axes: null   we don't care about the axes here, so this should be optional
+
+outputs:
+    - name: loss
+      data_type: float32
+      data_range: [0, 1]
+   	  # axes: null   we don't care about the axes here, so this should be optional
