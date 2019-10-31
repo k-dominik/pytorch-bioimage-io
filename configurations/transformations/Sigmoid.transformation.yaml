@@ -1,0 +1,20 @@
+name: Sigmoid
+description: Sigmoid activation function
+cite:
+    text: TODO
+    doi: TODO
+authors:
+    - Constantin Pape
+documentation: sigmoid.md
+tags: [activation, sigmoid]
+
+format_version: 0.1.0
+language: python
+framework: pytorch
+
+dependencies: ../../env_pytorch.yaml
+
+source: torch_resources.transformations.activations.Sigmoid
+
+inputs: any
+outputs: same

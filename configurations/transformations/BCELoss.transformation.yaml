@@ -3,18 +3,18 @@ description: Binary cross entropy loss
 cite:
     text: TODO
     doi: TODO
-
-format_version: 0.1.0
-language: python
-framework: pytorch
 authors:
     - Constantin Pape
 documentation: bce_loss.md
 tags: [loss, binary cross entropy]
 
+format_version: 0.1.0
+language: python
+framework: pytorch
+
 dependencies: ../../env_pytorch.yaml
 
-source: torch.nn.BCELoss
+source: torch.nn.functional.binary_cross_entropy
 
 inputs:  # optional: needed if input tensor restrictions apply
     - name: input

@@ -1,0 +1,19 @@
+name: NormalizeZeroMeanUnitVariance
+description: Normalize input to have zero mean, unit variance.
+cite:
+    text: TODO
+    doi: TODO
+authors:
+    - Constantin Pape
+documentation: normalize_zero_mean_unit_varaince.md
+tags: [activation, sigmoid]
+
+format_version: 0.1.0
+language: python
+
+dependencies: ../../env_no_pytorch.yaml
+
+source: torch_resources.transformations.normalizations.NormalizeZeroMeanUnitVariance
+
+inputs: any
+outputs: same

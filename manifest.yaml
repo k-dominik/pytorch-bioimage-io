@@ -1,8 +1,8 @@
 transformations:
     - configurations/transformations/BCELoss.transformation.yaml
+    - configurations/transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
     - configurations/transformations/RandomAxisRotation.transformation.yaml
     - configurations/transformations/Sigmoid.transformation.yaml
-    - configurations/transformations/ZeroMeanUnitVariance.transformation.yaml
 readers:
     - configurations/readers/BroadNucleusData.reader.yaml
 samplers:
