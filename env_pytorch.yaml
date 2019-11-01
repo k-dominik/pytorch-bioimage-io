@@ -1,0 +1,12 @@
+name:
+    torch_resources_pytorch
+channels:
+    - pytorch
+    - conda-forge
+    - defaults
+dependencies:
+    # TODO pin versions
+    - scipy
+    - sckit-image
+    - imageio
+    - pytorch >=1.0

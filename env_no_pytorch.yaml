@@ -1,0 +1,10 @@
+name:
+    torch_resources
+channels:
+    - conda-forge
+    - defaults
+dependencies:
+    # TODO pin versions
+    - scipy
+    - sckit-image
+    - imageio
