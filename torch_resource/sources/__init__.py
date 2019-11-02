@@ -1,1 +1,1 @@
-from .broad_nuclues_data import BroadNucleusData
+from .broad_nucleus_data import BroadNucleusData

@@ -13,7 +13,7 @@ language: python
 
 dependencies: ../../env_no_pytorch.yaml
 
-source: torch_resources.transformations.normalizations.NormalizeZeroMeanUnitVariance
+source: torch_resource.transformations.normalizations.NormalizeZeroMeanUnitVariance
 kwargs: [eps, mean, std]
 
 inputs: any

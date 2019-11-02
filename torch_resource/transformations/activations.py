@@ -1,4 +1,4 @@
-import torch
+import torch.nn.functional as F
 from .base import IndependentTransformation
 
 
@@ -10,4 +10,4 @@ class Sigmoid(IndependentTransformation):
         super().__init__(apply_to=apply_to)
 
     def apply_transformation(self, tensor):
-        return torch.Sigmoid(tensor)
+        return F.sigmoid(tensor)

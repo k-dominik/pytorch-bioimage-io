@@ -10,4 +10,4 @@ tags: ['nuclei', 'segmentation', 'kaggle', 'broad institute']
 
 dependencies: ../../env_no_pytorch.yaml
 
-source: torch_resource.source.broad_nucleus_data.BroadNucleusData
+source: torch_resource.sources.broad_nucleus_data.BroadNucleusData

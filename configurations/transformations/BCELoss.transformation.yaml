@@ -14,7 +14,7 @@ framework: pytorch
 
 dependencies: ../../env_pytorch.yaml
 
-source: torch.nn.functional.binary_cross_entropy
+source: torch.nn.BCELoss
 
 inputs:  # optional: needed if input tensor restrictions apply
     - name: input
@@ -30,4 +30,4 @@ outputs:
     - name: loss
       data_type: float32
       data_range: [0, 1]
-   	  # axes: null   we don't care about the axes here, so this should be optional
+      # axes: null   we don't care about the axes here, so this should be optional

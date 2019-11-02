@@ -13,7 +13,7 @@ language: python
 
 dependencies: ../../env_no_pytorch.yaml
 
-source: torch_resources.transformations.augmentations.RandomAxisRotation
+source: torch_resource.transformations.augmentations.RandomAxisRotation
 
 inputs: any
 outputs: same
