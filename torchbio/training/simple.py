@@ -6,8 +6,8 @@ from torchbio.transformations import apply_transformations
 
 # TODO config is just a stub object right now, adapt this to
 # the actual config object from pythonbioimageio
-def simple_train(config, n_iterations=500, batch_size=4, num_workers=2,
-                 out_file='./weights.pytorch'):
+def simple_training(config, n_iterations=500, batch_size=4, num_workers=2,
+                    out_file='./weights.pytorch'):
     """ Simplified training loop.
     """
 

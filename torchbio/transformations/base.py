@@ -1,8 +1,6 @@
-
-#
-# TODO in a real lib we would want something similar to inferno's batch_function, ...
+# TODO would be nice to have something similar to inferno's batch_function etc.
 # functionality, but more flexible w.r.t implementing different dimensions.
-#
+
 
 class IndependentTransformation:
     """ Transformation that can be applied to all input tensors independently.
@@ -25,6 +23,9 @@ class SynchronizedTransformation:
         self.apply_to = apply_to
 
     def __call__(self, *tensors):
+        # TODO the state might depend on some tensor properties (esp. shape)
+        # inferno solves this with the 'set_random_state' and 'get_random_state' construction
+        # here, we could just pass *tensors to set_next_state
         self.set_next_state()
         ret = [self.apply_transformation(x) if ii in self.apply_to else x
                for ii, x in enumerate(tensors)]
