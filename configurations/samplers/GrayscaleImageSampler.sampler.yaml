@@ -8,7 +8,7 @@ authors:
 documentation: ./grayscale_image_sampler.md
 tags: ['images']
 
-source: torch_resource.datasets.image_datasets.GrayscaleImageDataset
+source: torchbio.samplers.image_datasets.GrayscaleImageDataset
 outputs: any
 
 dependencies: ../../env_pytorch.yaml
