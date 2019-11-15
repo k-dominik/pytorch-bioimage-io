@@ -16,7 +16,7 @@ dependencies: ../../env_no_pytorch.yaml
 
 source: torchbio.transformations.normalizations.NormalizeZeroMeanUnitVariance
 required_kwargs: [apply_to]
-default_kwargs: [eps: 1.0e-6, mean: null, std: null]
+default_kwargs: {eps: 1.0e-6, mean: null, std: null}
 
 inputs: any
 outputs: same
