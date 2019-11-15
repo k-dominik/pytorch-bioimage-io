@@ -1,8 +1,8 @@
 name: Sigmoid
 description: Sigmoid activation function
 cite:
-    text: TODO
-    doi: TODO
+    - text: TODO
+      doi: TODO
 authors:
     - Constantin Pape
 documentation: sigmoid.md
