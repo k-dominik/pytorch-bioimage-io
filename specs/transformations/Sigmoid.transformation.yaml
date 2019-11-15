@@ -15,6 +15,7 @@ framework: pytorch
 dependencies: ../../env_pytorch.yaml
 
 source: torchbio.transformations.activations.Sigmoid
+required_kwargs: [apply_to]
 
 inputs: any
 outputs: same
