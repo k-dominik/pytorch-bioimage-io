@@ -1,12 +1,15 @@
 name: GrayscaleImageSampler
 description: Provide grayscale images, one slice per batch.
 cite:
-    text: TODO
-    doi: TODO
+    - text: TODO
+      doi: TODO
 authors:
     - Constantin Pape;@constantinpape
 documentation: ./grayscale_image_sampler.md
 tags: ['images']
+format_version: 0.1.0
+language: python
+framework: pytorch
 
 source: torchbio.samplers.image_datasets.GrayscaleImageDataset
 outputs: any

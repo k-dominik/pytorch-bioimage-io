@@ -1,8 +1,8 @@
 name: BCELoss
 description: Binary cross entropy loss
 cite:
-    text: TODO
-    doi: TODO
+    - text: TODO
+      doi: TODO
 authors:
     - Constantin Pape
 documentation: bce_loss.md

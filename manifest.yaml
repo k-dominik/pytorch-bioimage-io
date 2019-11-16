@@ -1,9 +1,9 @@
 transformations:
-    - configurations/transformations/BCELoss.transformation.yaml
-    - configurations/transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
-    - configurations/transformations/RandomAxisRotation.transformation.yaml
-    - configurations/transformations/Sigmoid.transformation.yaml
+    - specs/transformations/BCELoss.transformation.yaml
+    - specs/transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
+    - specs/transformations/RandomAxisRotation.transformation.yaml
+    - specs/transformations/Sigmoid.transformation.yaml
 readers:
-    - configurations/readers/BroadNucleusData.reader.yaml
+    - specs/readers/BroadNucleusData.reader.yaml
 samplers:
-    - configurations/samplers/GrayscaleImageSampler.sampler.yaml
+    - specs/samplers/GrayscaleImageSampler.sampler.yaml
