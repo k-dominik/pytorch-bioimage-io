@@ -5,7 +5,7 @@ cite:
       doi: TODO
 authors:
     - Constantin Pape
-documentation: sigmoid.md
+documentation: Sigmoid.md
 tags: [activation, sigmoid]
 
 format_version: 0.1.0
