@@ -5,7 +5,7 @@ cite:
       doi: TODO
 authors:
     - Constantin Pape;@constantinpape
-documentation: ./grayscale_image_sampler.md
+documentation: GrayscaleImageSampler.md
 tags: ['images']
 format_version: 0.1.0
 language: python
