@@ -9,5 +9,5 @@ class Sigmoid(IndependentTransformation):
     def __init__(self, apply_to):
         super().__init__(apply_to=apply_to)
 
-    def apply_transformation(self, tensor):
+    def apply_to_one(self, tensor):
         return torch.sigmoid(tensor)

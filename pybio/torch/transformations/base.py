@@ -1,5 +1,9 @@
 # TODO would be nice to have something similar to inferno's batch_function etc.
 # functionality, but more flexible w.r.t implementing different dimensions.
+from typing import List, Optional, Sequence, Tuple
+
+import torch
+
 import pybio.transformations
 
 class Transformation(pybio.transformations.Transformation):
@@ -24,11 +28,5 @@ class SynchronizedTransformation(Transformation):
         return super().apply(*tensors)
 
 
-def apply_transformations(transformations, *tensors):
-    """ Helper function to apply a list of transformations to input tensors.
-    """
-    if not all(isinstance(trafo, Transformation) for trafo in transformations):
-        raise ValueError("Expect iterable of transformations")
-    for trafo in transformations:
-        tensors = trafo(*tensors)
-    return tensors
+class Loss(pybio.transformations.Loss):
+    pass

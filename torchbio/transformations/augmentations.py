@@ -14,5 +14,5 @@ class RandomAxisRotation(SynchronizedTransformation):
         self.k = np.random.randint(0, 4)
 
     # FIXME only works for 2d inputs
-    def apply_transformation(self, tensor):
+    def apply_to_one(self, tensor):
         return np.rot90(tensor, k=self.k)

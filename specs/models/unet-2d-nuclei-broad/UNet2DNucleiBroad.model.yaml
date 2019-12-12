@@ -1,0 +1,84 @@
+name: UNet2DNucleiBroad
+description: A 2d U-Net pretrained on broad nucleus dataset.
+cite:
+    - text: "Ronneberger, Olaf et al. U-net: Convolutional networks for biomedical image segmentation. MICCAI 2015."
+      doi: https://doi.org/10.1007/978-3-319-24574-4_28
+authors:
+  - Constantin Pape;@bioimage-io
+  - Fynn Beuttenmüller
+documentation: UNet2DNucleiBroad.md
+tags: [unet2d, pytorch, nucleus-segmentation]
+
+format_version: 0.1.0
+language: python
+framework: pytorch
+
+source: torchbio.models.unet.UNet2d
+optional_kwargs: {input_channels: 1, output_channels: 1}
+
+test_input: null # ../test_input.npy
+test_output: null # ../test_output.npy
+thumbnail: null # ./nuclei_thumbnail.png
+
+# TODO double check inputs/outputs
+inputs:
+  - name: raw
+    axes: bcyx
+    data_type: float32
+    data_range: [-inf, inf]
+    shape: [1, 1, 128, 128]
+#        min: [1, 1, 32, 32]
+#        step: [0, 0, 32, 32]
+outputs:
+  - name: output
+    axes: bcyx
+    data_type: float32
+    data_range: [0, 1]
+    shape: [1, 1, 128, 128]
+    halo: [0, 0, 32, 32]
+#    shape:
+#        reference_input: raw
+#        scale: [1, 1, 1, 1]
+#        offset: [0, 0, 0, 0]
+
+prediction:
+    preprocess:
+        - spec: ../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
+          kwargs: {apply_to: [0]}
+    weights:
+        source: todo.doi
+        hash: {md5: TODO}
+    postprocess: null
+    dependencies: conda:../environment.yaml
+
+training:
+    setup:
+        reader:
+            spec: https://github.com/bioimage-io/python-bioimage-io/blob/68ede428118dd5add102b6ad3c8bb04e4033c17a/specs/readers/BroadNucleusDataBinarized.reader.yaml
+        sampler:
+            spec: https://github.com/bioimage-io/python-bioimage-io/blob/68ede428118dd5add102b6ad3c8bb04e4033c17a/specs/samplers/SequentialSamplerAlongDimension.sampler.yaml
+            kwargs: {sample_dimensions: [0, 0]}
+        preprocess:
+            - spec: ../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
+              kwargs: {apply_to: [0]}
+        loss:
+            - spec: ../../transformations/Sigmoid.transformation.yaml
+              kwargs: {apply_to: [0]}
+            - spec: https://github.com/bioimage-io/python-bioimage-io/blob/3e675d897382de793a64daf3ccb7f00b8ebdef16/specs/transformations/AsType.transformation.yaml
+              kwargs: {apply_to: [1], dtype: float32}
+            - spec: ../../transformations/BCELoss.transformation.yaml
+        optimizer:
+            source: torch.optim.Adam
+            optional_kwargs: {lr: 0.002}
+        # validation:
+        #   - {}
+
+    source: torchbio.training.simple.simple_training
+    required_kwargs: [model_spec]
+    optional_kwargs: {n_iterations: 25}
+    # enable different ways of specifying the dependencies.
+    # this would hold all training dependencies, e.g. as a frozen conda environment
+    # or as a pom.xml
+    dependencies: # this is a file to the dependencies
+        conda:../environment.yaml
+    description: "Train the unet via binary cross entropy"
