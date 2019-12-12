@@ -11,7 +11,7 @@ format_version: 0.1.0
 language: python
 framework: pytorch
 
-source: torchbio.samplers.image_datasets.GrayscaleImageDataset
+source: pybio.torch.samplers.image_datasets.GrayscaleImageDataset
 outputs: any
 
 dependencies: ../../env_pytorch.yaml

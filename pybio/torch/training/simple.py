@@ -1,7 +1,13 @@
-from tqdm import trange
+try:
+    from tqdm import trange
+except ImportError:
+    import warnings
+    warnings.warn("tqdm dependency is missing")
+    trange = range
+
 import torch
 from torch.utils.data import DataLoader
-from torchbio.transformations import apply_transformations
+from pybio.torch.transformations import apply_transformations
 
 
 # TODO config is just a stub object right now, adapt this to

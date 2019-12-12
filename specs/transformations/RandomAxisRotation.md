@@ -5,7 +5,7 @@ cite:
       doi: TODO
 authors:
     - Constantin Pape
-documentation: RandomAxisRotation.md
+documentation: bce_loss.md
 tags: [loss, binary cross entropy]
 
 format_version: 0.1.0

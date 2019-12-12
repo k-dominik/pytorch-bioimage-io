@@ -33,4 +33,4 @@ outputs:
       data_type: float32
       data_range: [0, 1]
       # axes: null   we don't care about the axes here, so this should be optional
-      shape: [0]
+      shape: any
