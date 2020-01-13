@@ -1,4 +1,4 @@
-from .base import IndependentTransformation
+from pybio.torch.transformations.base import IndependentTransformation
 
 
 class NormalizeZeroMeanUnitVariance(IndependentTransformation):

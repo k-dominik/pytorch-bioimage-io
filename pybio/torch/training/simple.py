@@ -1,3 +1,6 @@
+from pathlib import Path
+from typing import Union, IO
+
 try:
     from tqdm import trange
 except ImportError:
@@ -7,21 +10,22 @@ except ImportError:
 
 import torch
 
-from pybio.transformations import apply_transformations_and_losses
-from pybio_spec.spec_types import ModelSpec
+from pybio.core.transformations import apply_transformations_and_losses
+from pybio.spec.spec_types import ModelSpec
 
 from torch.utils.data import DataLoader
 from pybio.torch.transformations import apply_transformations
 
-# TODO config is just a stub object right now, adapt this to
-# the actual config object from pythonbioimageio
-def simple_training(model_spec: ModelSpec, n_iterations=500, batch_size=4, num_workers=2, out_file="./weights.pytorch"):
+def simple_training(model_spec: ModelSpec, n_iterations: int, batch_size: int, num_workers: int, out_file: Union[str, Path, IO[bytes]]) -> torch.nn.Module:
     """ Simplified training loop.
     """
+    if isinstance(out_file, str) or isinstance(out_file, Path):
+        out_file = Path(out_file)
+        out_file.parent.mkdir(exist_ok=True)
 
     model = model_spec.get_instance()
 
-    # instaniate all training parameters from the training config
+    # instantiate all training parameters from the training config
     train_config = model_spec.spec.training.setup
 
     reader = train_config.reader.get_instance()
@@ -51,3 +55,4 @@ def simple_training(model_spec: ModelSpec, n_iterations=500, batch_size=4, num_w
 
     # save model weights
     torch.save(model.state_dict(), out_file)
+    return model

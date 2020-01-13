@@ -1,5 +1,5 @@
 models:
-    - specs/models/unet-2d-nuclei-broad/UNet2DNucleiBroad.model.yaml
+    - specs/models/unet2d/nuclei_broad/UNet2DNucleiBroad.model.yaml
 transformations:
     - specs/transformations/BCELoss.transformation.yaml
     - specs/transformations/NormalizeZeroMeanUnitVariance.transformation.yaml

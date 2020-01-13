@@ -2,7 +2,7 @@ from typing import Sequence, Optional
 
 import torch.nn
 
-from torchbio.transformations.base import Loss
+from pybio.torch.transformations.base import Loss
 
 
 class BCELoss(Loss):

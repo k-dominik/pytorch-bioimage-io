@@ -1,5 +1,5 @@
 import torch
-from .base import IndependentTransformation
+from pybio.torch.transformations.base import IndependentTransformation
 
 
 # TODO would be nice to auto-generate this

@@ -1,1 +1,1 @@
-from .unet2d import UNet2d
+from pybio.torch.models.unet.unet2d import UNet2d

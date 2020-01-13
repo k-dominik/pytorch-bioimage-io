@@ -1,7 +1,7 @@
 import numpy
 import pytest
 
-from torchbio.transformations.normalizations import NormalizeZeroMeanUnitVariance
+from pybio.torch.transformations.normalizations import NormalizeZeroMeanUnitVariance
 
 testdata = [
     ([(3, 4)], [(3, 4)]),

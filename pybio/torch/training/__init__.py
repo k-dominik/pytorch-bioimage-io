@@ -1,1 +1,1 @@
-from .simple import simple_training
+from pybio.torch.training.simple import simple_training

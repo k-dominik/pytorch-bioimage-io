@@ -1,4 +1,4 @@
-zname: NormalizeZeroMeanUnitVariance
+name: NormalizeZeroMeanUnitVariance
 description: Normalize input to have zero mean, unit variance.
 cite:
     - text: TODO
