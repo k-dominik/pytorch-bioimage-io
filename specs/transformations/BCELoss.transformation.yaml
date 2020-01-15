@@ -17,21 +17,18 @@ dependencies: ../../env_pytorch.yaml
 source: pybio.torch.transformations.losses.BCELoss
 optional_kwargs: {apply_to: null}
 
-inputs:  # optional: needed if input tensor restrictions apply
+inputs:
     - name: input
       data_type: float32
       data_range: [0, 1]
-      # axes: null   we don't care about the axes here, so this should be optional
       shape: any
     - name: target
       data_type: float32
       data_range: [0, 1]
-      # axes: null   we don't care about the axes here, so this should be optional
       shape: any
 
 outputs:
     - name: loss
       data_type: float32
       data_range: [0, 1]
-      axes: "c"
-      shape: any
+      shape: []
