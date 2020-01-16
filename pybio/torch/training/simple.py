@@ -1,22 +1,25 @@
+import torch
+
 from pathlib import Path
+from torch.utils.data import DataLoader
 from typing import Union, IO
 
 try:
     from tqdm import trange
 except ImportError:
     import warnings
+
     warnings.warn("tqdm dependency is missing")
     trange = range
 
-import torch
 
-from pybio.core.transformations import apply_transformations_and_losses
 from pybio.spec.spec_types import ModelSpec
-
-from torch.utils.data import DataLoader
 from pybio.torch.transformations import apply_transformations
 
-def simple_training(model_spec: ModelSpec, n_iterations: int, batch_size: int, num_workers: int, out_file: Union[str, Path, IO[bytes]]) -> torch.nn.Module:
+
+def simple_training(
+    model_spec: ModelSpec, n_iterations: int, batch_size: int, num_workers: int, out_file: Union[str, Path, IO[bytes]]
+) -> torch.nn.Module:
     """ Simplified training loop.
     """
     if isinstance(out_file, str) or isinstance(out_file, Path):
@@ -32,8 +35,9 @@ def simple_training(model_spec: ModelSpec, n_iterations: int, batch_size: int, n
     sampler = train_config.sampler.get_instance(reader=reader)
 
     preprocess = [prep.get_instance() for prep in train_config.preprocess]
+    postprocess = [post.get_instance() for post in train_config.postprocess]
 
-    loss = [loss_prep.get_instance() for loss_prep in train_config.loss]
+    losses = [loss_prep.get_instance() for loss_prep in train_config.losses]
     optimizer = train_config.optimizer.get_instance(model.parameters())
 
     # build the data-loader from our sampler
@@ -46,8 +50,8 @@ def simple_training(model_spec: ModelSpec, n_iterations: int, batch_size: int, n
 
         x, y = apply_transformations(preprocess, x, y)
         out = model(x)
-
-        tensors, losses = apply_transformations_and_losses(loss, out, y)
+        out, y = apply_transformations(postprocess, out, y)
+        losses = apply_transformations(losses, out, y)
         ll = sum(losses)
         ll.backward()
 

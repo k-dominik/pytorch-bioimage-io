@@ -61,12 +61,13 @@ training:
         preprocess:
             - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
               kwargs: {apply_to: [0]}
-        loss:
+        postprocess:
             - spec: ../../../transformations/Sigmoid.transformation.yaml
               kwargs: {apply_to: [0]}
             - spec: ../../../transformations/Cast.transformation.yaml
               kwargs: {apply_to: [1], dtype: float32}
-            - spec: ../../../transformations/BCELoss.transformation.yaml
+        losses:
+            - spec: ../../../losses/BCELoss.transformation.yaml
         optimizer:
             source: torch.optim.Adam
             optional_kwargs: {lr: 0.002}

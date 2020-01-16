@@ -1,9 +1,9 @@
 import torch
 
-from pybio.torch.transformations.base import IndependentTransformation
+from pybio.torch.transformations import Transformation
 
 
-class AsType(IndependentTransformation):
+class AsType(Transformation):
     def __init__(self, dtype: str, non_blocking: bool, **super_kwargs):
         super().__init__(**super_kwargs)
         torch_dtype = getattr(torch, dtype)
@@ -12,5 +12,5 @@ class AsType(IndependentTransformation):
 
         self.kwargs = {"dtype": torch_dtype, "non_blocking": non_blocking}
 
-    def apply_to_one(self, tensor: torch.Tensor) -> torch.Tensor:
+    def apply_to_chosen(self, tensor: torch.Tensor) -> torch.Tensor:
         return tensor.type(**self.kwargs)

@@ -1,2 +1,2 @@
 from pybio.core.transformations import apply_transformations
-from pybio.torch.transformations.base import Transformation, SynchronizedTransformation, apply_transformations_and_losses
+from pybio.torch.transformations.base import Transformation, CombinedTransformation, SynchronizedTransformation

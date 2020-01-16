@@ -11,7 +11,7 @@ class NormalizeZeroMeanUnitVariance(Transformation):
         self.mean = mean
         self.std = std
 
-    def apply_to_one(self, tensor):
+    def apply_to_chosen(self, tensor):
         mean = tensor.mean() if self.mean is None else self.mean
         std = tensor.std() if self.std is None else self.std
         return (tensor - mean) / (std + self.eps)
