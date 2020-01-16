@@ -26,6 +26,7 @@ setup(
     packages=find_namespace_packages(exclude=["tests"]),  # Required
     install_requires=[
         "torch>=1.1",
+        "numpy>=1.17",
         "pybio@git+http://github.com/bioimage-io/python-bioimage-io"
     ],
     extras_require={
