@@ -5,7 +5,7 @@ cite:
       doi: TODO
 authors:
     - Constantin Pape
-documentation: losses.md
+documentation: transformations.md
 tags: [loss, binary cross entropy]
 
 format_version: 0.1.0
@@ -14,7 +14,7 @@ framework: pytorch
 
 dependencies: ../../env_pytorch.yaml
 
-source: pybio.torch.losses.BCELoss
+source: pybio.torch.transformations.BCELoss
 optional_kwargs: {apply_to: null}
 
 inputs:

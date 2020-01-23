@@ -67,7 +67,7 @@ training:
             - spec: ../../../transformations/Cast.transformation.yaml
               kwargs: {apply_to: [1], dtype: float32}
         losses:
-            - spec: ../../../losses/BCELoss.transformation.yaml
+            - spec: ../../../transformations/BCELoss.transformation.yaml
         optimizer:
             source: torch.optim.Adam
             optional_kwargs: {lr: 0.002}
