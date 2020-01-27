@@ -21,12 +21,9 @@ def pytest_generate_tests(metafunc):
 
 @pytest.fixture
 def required_kwargs():
-    kwargs = {
-        "specs/transformations/NormalizeZeroMeanUnitVariance.transformation.yaml": {"apply_to": [0]},
-        "specs/transformations/Sigmoid.transformation.yaml": {"apply_to": [0]},
-    }
-    # testing the test data...
+    kwargs = {}
 
+    # testing the test data...
     for spec_path in kwargs:
         if not (MANIFEST_PATH.parent / spec_path).exists():
             raise FileNotFoundError(spec_path)

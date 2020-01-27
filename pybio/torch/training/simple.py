@@ -1,46 +1,44 @@
+import torch
+
+from pathlib import Path
+from torch.utils.data import DataLoader
+from typing import Union, IO
+
 try:
     from tqdm import trange
 except ImportError:
     import warnings
+
     warnings.warn("tqdm dependency is missing")
     trange = range
 
-import torch
-from torch.utils.data import DataLoader
+
+from pybio.spec.spec_types import ModelSpec
 from pybio.torch.transformations import apply_transformations
 
 
-# TODO config is just a stub object right now, adapt this to
-# the actual config object from pythonbioimageio
-def simple_training(config, n_iterations=500, batch_size=4, num_workers=2, out_file="./weights.pytorch"):
+def simple_training(
+    model_spec: ModelSpec, n_iterations: int, batch_size: int, num_workers: int, out_file: Union[str, Path, IO[bytes]]
+) -> torch.nn.Module:
     """ Simplified training loop.
     """
+    if isinstance(out_file, str) or isinstance(out_file, Path):
+        out_file = Path(out_file)
+        out_file.parent.mkdir(exist_ok=True)
 
-    # instantiate the model from the model config
-    model_class = config.object_
-    model_kwargs = config.kwargs
-    model = model_class(**model_kwargs)
+    model = model_spec.get_instance()
 
-    # instaniate all training parameters from the training config
-    train_config = config.training.setup
+    # instantiate all training parameters from the training config
+    train_config = model_spec.spec.training.setup
 
-    reader_class = train_config.reader.object_
-    reader_kwargs = train_config.reader.kwargs
-    reader = reader_class(**reader_kwargs)
+    reader = train_config.reader.get_instance()
+    sampler = train_config.sampler.get_instance(reader=reader)
 
-    sampler_class = train_config.sampler.object_
-    sampler_kwargs = train_config.sampler.kwargs
-    sampler = sampler_class(reader, **sampler_kwargs)
+    preprocess = [prep.get_instance() for prep in train_config.preprocess]
+    postprocess = [post.get_instance() for post in train_config.postprocess]
 
-    preprocess_config = train_config.preprocess
-    preprocess = [conf.object_(**conf.kwargs) for conf in preprocess_config]
-
-    loss_config = train_config.loss
-    loss = [conf.object_(**conf.kwargs) for conf in loss_config]
-
-    optimizer_class = train_config.optimizer.object_
-    optimizer_kwargs = train_config.optimizer.kwargs
-    optimizer = optimizer_class(model.parameters(), **optimizer_kwargs)
+    losses = [loss_prep.get_instance() for loss_prep in train_config.losses]
+    optimizer = train_config.optimizer.get_instance(model.parameters())
 
     # build the data-loader from our sampler
     loader = DataLoader(sampler, shuffle=True, num_workers=num_workers, batch_size=batch_size)
@@ -52,14 +50,13 @@ def simple_training(config, n_iterations=500, batch_size=4, num_workers=2, out_f
 
         x, y = apply_transformations(preprocess, x, y)
         out = model(x)
-
-        # we assume that the actual loss function is the last entry in
-        # the list of loss transformations
-        out, y = apply_transformations(loss[:-1], out, y)
-        ll = loss[-1](out, y)
-
+        out, y = apply_transformations(postprocess, out, y)
+        losses = apply_transformations(losses, out, y)
+        ll = sum(losses)
         ll.backward()
+
         optimizer.step()
 
     # save model weights
     torch.save(model.state_dict(), out_file)
+    return model

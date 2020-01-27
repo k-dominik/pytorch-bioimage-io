@@ -1,0 +1,19 @@
+name: Cast
+description: casts array(s) to a datatype
+cite: []
+authors:
+    - Fynn Beuttenmueller
+documentation: transformations.md
+tags: [torch, pytorch, astype, cast, dtype]
+
+format_version: 0.1.0
+language: python
+framework: pytorch
+
+dependencies: ../../env_numpy.yaml
+source: pybio.torch.transformations.generic.AsType
+required_kwargs: [dtype]
+optional_kwargs: {apply_to: null, non_blocking: false}
+
+inputs: any
+outputs: dynamic

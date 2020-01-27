@@ -1,7 +1,8 @@
+models:
+    - specs/models/unet2d/nuclei_broad/UNet2DNucleiBroad.model.yaml
 transformations:
     - specs/transformations/BCELoss.transformation.yaml
     - specs/transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
-    - specs/transformations/RandomAxisRotation.transformation.yaml
     - specs/transformations/Sigmoid.transformation.yaml
 samplers:
     - specs/samplers/GrayscaleImageSampler.sampler.yaml

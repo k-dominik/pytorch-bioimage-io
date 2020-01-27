@@ -27,11 +27,10 @@ setup(
     install_requires=[
         "torch>=1.1",
         "numpy>=1.17",
-        "pybio@git+http://github.com/bioimage-io/python-bioimage-io"
+        "imageio>=2.5",
+        "pybio@git+http://github.com/bioimage-io/python-bioimage-io",
     ],
-    extras_require={
-        "test": ["tox", "pytest"],
-    },
+    extras_require={"test": ["tox", "pytest"]},
     project_urls={  # Optional
         "Bug Reports": "https://github.com/bioimage-io/pytorch-bioimage-io/issues",
         "Source": "https://github.com/bioimage-io/pytorch-bioimage-io",
