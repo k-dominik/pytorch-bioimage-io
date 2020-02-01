@@ -4,6 +4,8 @@ from pathlib import Path
 from torch.utils.data import DataLoader
 from typing import Union, IO
 
+from pybio.spec.utils import get_instance
+
 try:
     from tqdm import trange
 except ImportError:
@@ -13,12 +15,12 @@ except ImportError:
     trange = range
 
 
-from pybio.spec.spec_types import ModelSpec
+from pybio.spec.node import Model
 from pybio.torch.transformations import apply_transformations
 
 
 def simple_training(
-    model_spec: ModelSpec, n_iterations: int, batch_size: int, num_workers: int, out_file: Union[str, Path, IO[bytes]]
+    pybio_model: Model, n_iterations: int, batch_size: int, num_workers: int, out_file: Union[str, Path, IO[bytes]]
 ) -> torch.nn.Module:
     """ Simplified training loop.
     """
@@ -26,19 +28,19 @@ def simple_training(
         out_file = Path(out_file)
         out_file.parent.mkdir(exist_ok=True)
 
-    model = model_spec.get_instance()
+    model = get_instance(pybio_model)
 
     # instantiate all training parameters from the training config
-    train_config = model_spec.spec.training.setup
+    setup = pybio_model.spec.training.setup
 
-    reader = train_config.reader.get_instance()
-    sampler = train_config.sampler.get_instance(reader=reader)
+    reader = get_instance(setup.reader)
+    sampler = get_instance(setup.sampler, reader=reader)
 
-    preprocess = [prep.get_instance() for prep in train_config.preprocess]
-    postprocess = [post.get_instance() for post in train_config.postprocess]
+    preprocess = [get_instance(prep) for prep in setup.preprocess]
+    postprocess = [get_instance(post) for post in setup.postprocess]
 
-    losses = [loss_prep.get_instance() for loss_prep in train_config.losses]
-    optimizer = train_config.optimizer.get_instance(model.parameters())
+    losses = [get_instance(loss_prep) for loss_prep in setup.losses]
+    optimizer = get_instance(setup.optimizer, params=model.parameters())
 
     # build the data-loader from our sampler
     loader = DataLoader(sampler, shuffle=True, num_workers=num_workers, batch_size=batch_size)
