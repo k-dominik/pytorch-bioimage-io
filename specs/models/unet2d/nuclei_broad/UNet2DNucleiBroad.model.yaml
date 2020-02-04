@@ -52,35 +52,35 @@ prediction:
     dependencies: conda:../environment.yaml
 
 training:
-    setup:
-        reader:
-            spec: https://github.com/bioimage-io/python-bioimage-io/blob/11a40544f30cd95e5085269e6cc6754a2c1c16ef/specs/readers/BroadNucleusDataBinarized.reader.yaml
-        sampler:
-            spec: https://github.com/bioimage-io/python-bioimage-io/blob/11a40544f30cd95e5085269e6cc6754a2c1c16ef/specs/samplers/SequentialSamplerAlongDimension.sampler.yaml
-            kwargs: {sample_dimensions: [0, 0]}
-        preprocess:
-            - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
-              kwargs: {apply_to: [0]}
-        postprocess:
-            - spec: ../../../transformations/Sigmoid.transformation.yaml
-              kwargs: {apply_to: [0]}
-            - spec: ../../../transformations/Cast.transformation.yaml
-              kwargs: {apply_to: [1], dtype: float32}
-        losses:
-            - spec: ../../../transformations/BCELoss.transformation.yaml
-        optimizer:
-            source: torch.optim.Adam
-            required_kwargs: [params]
-            optional_kwargs: {lr: 0.002}
-        # validation:
-        #   - {}
+  setup:
+    readers:
+      - spec: https://github.com/bioimage-io/python-bioimage-io/blob/11a40544f30cd95e5085269e6cc6754a2c1c16ef/specs/readers/BroadNucleusDataBinarized.reader.yaml
+    sampler:
+      spec: https://github.com/bioimage-io/python-bioimage-io/blob/11a40544f30cd95e5085269e6cc6754a2c1c16ef/specs/samplers/SequentialSamplerAlongDimension.sampler.yaml
+      kwargs: {sample_dimensions: [0, 0]}
+    preprocess:
+      - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
+        kwargs: {apply_to: [0]}
+    postprocess:
+      - spec: ../../../transformations/Sigmoid.transformation.yaml
+        kwargs: {apply_to: [0]}
+      - spec: ../../../transformations/Cast.transformation.yaml
+        kwargs: {apply_to: [1], dtype: float32}
+    losses:
+      - spec: ../../../transformations/BCELoss.transformation.yaml
+    optimizer:
+      source: torch.optim.Adam
+      required_kwargs: [params]
+      optional_kwargs: {lr: 0.002}
+    # validation:
+    #   - {}
 
-    source: pybio.torch.training.simple.simple_training
-    required_kwargs: [pybio_model]
-    optional_kwargs: {n_iterations: 25, batch_size: 4, num_workers: 2, out_file: ./weights.pytorch}
-    # enable different ways of specifying the dependencies.
-    # this would hold all training dependencies, e.g. as a frozen conda environment
-    # or as a pom.xml
-    dependencies: # this is a file to the dependencies
-        conda:../environment.yaml
-    description: Train the unet via binary cross entropy
+  source: pybio.torch.training.simple.simple_training
+  required_kwargs: [pybio_model]
+  optional_kwargs: {n_iterations: 25, batch_size: 4, num_workers: 2, out_file: ./weights.pytorch}
+  # enable different ways of specifying the dependencies.
+  # this would hold all training dependencies, e.g. as a frozen conda environment
+  # or as a pom.xml
+  dependencies: # this is a file to the dependencies
+      conda:../environment.yaml
+  description: Train the unet via binary cross entropy

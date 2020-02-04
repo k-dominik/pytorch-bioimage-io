@@ -11,7 +11,7 @@ def test_UNet2dNucleiBroads():
         Path(__file__).parent / "../../../specs/models/unet2d/nuclei_broad/UNet2DNucleiBroad.model.yaml"
     ).resolve()
     assert spec_path.exists(), spec_path
-    pybio_model = load_model(spec_path.as_posix(), kwargs={})
+    pybio_model = load_model(str(spec_path), kwargs={})
     with BytesIO() as f:
         model = utils.train(pybio_model, n_iterations=1, out_file=f)
         f.seek(0)
