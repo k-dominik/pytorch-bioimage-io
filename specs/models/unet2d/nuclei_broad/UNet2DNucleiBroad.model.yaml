@@ -55,12 +55,14 @@ training:
   setup:
     readers:
       - spec: https://github.com/bioimage-io/python-bioimage-io/blob/11a40544f30cd95e5085269e6cc6754a2c1c16ef/specs/readers/BroadNucleusDataBinarized.reader.yaml
+        kwargs:
+          transformations:
+            - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
+              kwargs: {apply_to: [0]}
     sampler:
       spec: https://github.com/bioimage-io/python-bioimage-io/blob/11a40544f30cd95e5085269e6cc6754a2c1c16ef/specs/samplers/SequentialSamplerAlongDimension.sampler.yaml
       kwargs: {sample_dimensions: [0, 0]}
-    preprocess:
-      - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
-        kwargs: {apply_to: [0]}
+    preprocess: []
     postprocess:
       - spec: ../../../transformations/Sigmoid.transformation.yaml
         kwargs: {apply_to: [0]}
