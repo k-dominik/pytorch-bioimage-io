@@ -4,5 +4,3 @@ transformations:
     - specs/transformations/BCELoss.transformation.yaml
     - specs/transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
     - specs/transformations/Sigmoid.transformation.yaml
-samplers:
-    - specs/samplers/GrayscaleImageSampler.sampler.yaml

@@ -3,17 +3,17 @@ from io import BytesIO
 
 import torch
 
-from pybio.spec import load_spec
+from pybio.spec import load_model, utils
 
 
-def test_UNet2dNucleiBroads():
+def test_UNet2dNucleiBroads(cache_path):
     spec_path = (
         Path(__file__).parent / "../../../specs/models/unet2d/nuclei_broad/UNet2DNucleiBroad.model.yaml"
     ).resolve()
     assert spec_path.exists(), spec_path
-    loaded_spec = load_spec(spec_path.as_posix(), kwargs={})
+    pybio_model = load_model(str(spec_path), cache_path=cache_path)
     with BytesIO() as f:
-        model = loaded_spec.train(n_iterations=1, out_file=f)
+        model = utils.train(pybio_model, n_iterations=1, out_file=f)
         f.seek(0)
         loaded = torch.load(f)
 

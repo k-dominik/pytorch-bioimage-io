@@ -3,9 +3,7 @@ import pytest
 
 from pybio.torch.transformations.normalizations import NormalizeZeroMeanUnitVariance
 
-testdata = [
-    ([(3, 4)], [(3, 4)]),
-]
+testdata = [([(3, 4)], [(3, 4)])]
 
 
 @pytest.mark.parametrize("ipt_shapes,out_shapes", testdata)
