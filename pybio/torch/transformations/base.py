@@ -7,8 +7,10 @@ import pybio.core.transformations
 class Transformation(pybio.core.transformations.Transformation):
     pass
 
+
 class CombinedTransformation(pybio.core.transformations.CombinedTransformation):
     pass
+
 
 class SynchronizedTransformation(pybio.core.transformations.SynchronizedTransformation):
     pass

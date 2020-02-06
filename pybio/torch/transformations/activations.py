@@ -6,5 +6,6 @@ from pybio.torch.transformations.base import Transformation
 class Sigmoid(Transformation):
     """ Sigmoid activation
     """
+
     def apply_to_chosen(self, tensor):
         return torch.sigmoid(tensor)
