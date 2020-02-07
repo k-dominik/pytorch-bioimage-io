@@ -1,5 +1,5 @@
 from pathlib import Path
-from io import BytesIO, BufferedReader
+from io import BytesIO
 
 import torch
 
@@ -29,4 +29,4 @@ def test_UNet2dNucleiBroads_load_weights(cache_path):
     ).resolve()
     assert spec_path.exists(), spec_path
     pybio_model = load_model(str(spec_path), cache_path=cache_path)
-    assert isinstance(pybio_model.spec.prediction.weights.source, BufferedReader)
+    assert isinstance(pybio_model.spec.prediction.weights.source, BytesIO)
