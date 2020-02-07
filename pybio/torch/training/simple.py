@@ -15,7 +15,7 @@ except ImportError:
     trange = range
 
 
-from pybio.spec.node import Model
+from pybio.spec.nodes import Model
 from pybio.torch.transformations import apply_transformations
 
 
@@ -33,7 +33,7 @@ def simple_training(
     # instantiate all training parameters from the training config
     setup = pybio_model.spec.training.setup
 
-    sampler = get_instance(setup.sampler, readers=[get_instance(r) for r in setup.readers])
+    sampler = get_instance(setup.sampler)
 
     preprocess = [get_instance(prep) for prep in setup.preprocess]
     postprocess = [get_instance(post) for post in setup.postprocess]

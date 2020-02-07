@@ -21,3 +21,12 @@ def test_UNet2dNucleiBroads(cache_path):
     for t in state:
         assert t in loaded
         assert torch.equal(state[t], loaded[t])
+
+
+def test_UNet2dNucleiBroads_load_weights(cache_path):
+    spec_path = (
+        Path(__file__).parent / "../../../specs/models/unet2d/nuclei_broad/UNet2DNucleiBroad.model.yaml"
+    ).resolve()
+    assert spec_path.exists(), spec_path
+    pybio_model = load_model(str(spec_path), cache_path=cache_path)
+    assert isinstance(pybio_model.spec.prediction.weights.source, BytesIO)
