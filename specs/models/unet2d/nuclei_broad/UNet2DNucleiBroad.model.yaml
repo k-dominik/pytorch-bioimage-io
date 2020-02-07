@@ -46,22 +46,24 @@ prediction:
         - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
           kwargs: {apply_to: [0]}
     weights:
-        source: todo.doi
+        source: https://zenodo.org/record/3446812/files/unet2d_weights.torch
         hash: {md5: TODO}
     postprocess: null
     dependencies: conda:../environment.yaml
 
 training:
   setup:
-    readers:
-      - spec: https://github.com/bioimage-io/python-bioimage-io/blob/a1121e389d4dcbf2bb20398b87427b9c6f7c94ec/specs/readers/BroadNucleusDataBinarized.reader.yaml
-        kwargs:
-          transformations:
-            - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
-              kwargs: {apply_to: [0]}
-    sampler:
-      spec: https://github.com/bioimage-io/python-bioimage-io/blob/a1121e389d4dcbf2bb20398b87427b9c6f7c94ec/specs/samplers/SequentialSamplerAlongDimension.sampler.yaml
-      kwargs: {sample_dimensions: [0, 0]}
+#    meta_sampler:
+#      spec:
+#      kwargs:
+    samplers:
+      - spec: https://github.com/bioimage-io/python-bioimage-io/blob/a1121e389d4dcbf2bb20398b87427b9c6f7c94ec/specs/samplers/SequentialSamplerAlongDimension.sampler.yaml
+        kwargs: {sample_dimensions: [0, 0]}
+        readers:
+          - spec: https://github.com/bioimage-io/python-bioimage-io/blob/a1121e389d4dcbf2bb20398b87427b9c6f7c94ec/specs/readers/BroadNucleusDataBinarized.reader.yaml
+            transformations:
+              - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
+                kwargs: {apply_to: [0]}
     preprocess: []
     postprocess:
       - spec: ../../../transformations/Sigmoid.transformation.yaml
