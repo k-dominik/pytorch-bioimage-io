@@ -15,7 +15,7 @@ except ImportError:
     trange = range
 
 
-from pybio.spec.node import Model
+from pybio.spec.nodes import Model
 from pybio.torch.transformations import apply_transformations
 
 
