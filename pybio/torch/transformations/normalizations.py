@@ -1,7 +1,7 @@
-from pybio.torch.transformations import Transformation
+from pybio.torch.transformations import PyBioTorchTransformation
 
 
-class NormalizeZeroMeanUnitVariance(Transformation):
+class NormalizeZeroMeanUnitVariance(PyBioTorchTransformation):
     """ Sigmoid activation
     """
 

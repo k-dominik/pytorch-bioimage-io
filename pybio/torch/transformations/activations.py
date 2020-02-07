@@ -1,9 +1,9 @@
 import torch
-from pybio.torch.transformations.base import Transformation
+from pybio.torch.transformations.base import PyBioTorchTransformation
 
 
 # TODO would be nice to auto-generate this
-class Sigmoid(Transformation):
+class Sigmoid(PyBioTorchTransformation):
     """ Sigmoid activation
     """
 

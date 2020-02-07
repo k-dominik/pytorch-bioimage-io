@@ -3,10 +3,10 @@ from typing import Sequence, Optional, List
 import torch.nn
 
 from pybio.core.transformations import ApplyToAll
-from pybio.torch.transformations import CombinedTransformation
+from pybio.torch.transformations import PyBioTorchCombinedTransformation
 
 
-class BCELoss(CombinedTransformation):
+class BCELoss(PyBioTorchCombinedTransformation):
     def __init__(self, apply_to: Optional[Sequence[int]] = None, **kwargs):
         super().__init__(apply_to=apply_to)
         assert isinstance(self.apply_to, ApplyToAll) or len(self.apply_to) == 2

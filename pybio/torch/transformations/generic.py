@@ -1,9 +1,9 @@
 import torch
 
-from pybio.torch.transformations import Transformation
+from pybio.torch.transformations import PyBioTorchTransformation
 
 
-class AsType(Transformation):
+class AsType(PyBioTorchTransformation):
     def __init__(self, dtype: str, non_blocking: bool, **super_kwargs):
         super().__init__(**super_kwargs)
         torch_dtype = getattr(torch, dtype)

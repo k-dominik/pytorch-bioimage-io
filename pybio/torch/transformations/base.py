@@ -4,13 +4,13 @@
 import pybio.core.transformations
 
 
-class Transformation(pybio.core.transformations.Transformation):
+class PyBioTorchTransformation(pybio.core.transformations.PyBioTransformation):
     pass
 
 
-class CombinedTransformation(pybio.core.transformations.CombinedTransformation):
+class PyBioTorchCombinedTransformation(pybio.core.transformations.CombinedPyBioTransformation):
     pass
 
 
-class SynchronizedTransformation(pybio.core.transformations.SynchronizedTransformation):
+class PyBioTorchSynchronizedTransformation(pybio.core.transformations.SynchronizedPyBioTransformation):
     pass
