@@ -48,7 +48,7 @@ prediction:
     weights:
         source: https://zenodo.org/record/3446812/files/unet2d_weights.torch
         hash: {md5: TODO}
-    postprocess: null
+    postprocess: []
     dependencies: conda:../environment.yaml
 
 training:
