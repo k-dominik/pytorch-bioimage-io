@@ -26,6 +26,9 @@ class EnsureTorch(PyBioTorchTransformation):
 
     def apply_to_chosen(self, tensor: Union[numpy.ndarray, torch.Tensor]):
         if isinstance(tensor, numpy.ndarray):
+            if tensor.dtype == numpy.uint16:  # not supported by pytorch
+                tensor = tensor.astype(numpy.int32)
+
             return torch.from_numpy(tensor)
         else:
             return tensor
