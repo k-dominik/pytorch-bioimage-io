@@ -29,3 +29,15 @@ class EnsureTorch(PyBioTorchTransformation):
             return torch.from_numpy(tensor)
         else:
             return tensor
+
+
+class EnsureNumpy(PyBioTorchTransformation):
+    """
+    Converts `torch.Tensor` to `numpy.ndarray`, pipes `numpy.ndarray` through
+    """
+
+    def apply_to_chosen(self, tensor: Union[numpy.ndarray, torch.Tensor]):
+        if not isinstance(tensor, numpy.ndarray):
+            return tensor.detach().cpu().numpy()
+        else:
+            return tensor
