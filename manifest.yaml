@@ -4,3 +4,5 @@ transformations:
     - specs/transformations/BCELoss.transformation.yaml
     - specs/transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
     - specs/transformations/Sigmoid.transformation.yaml
+    - specs/transformations/EnsureTorch.transformation.yaml
+    - specs/transformations/EnsureNumpy.transformation.yaml

@@ -12,7 +12,7 @@ format_version: 0.1.0
 language: python
 framework: pytorch
 
-dependencies: ../../env_no_pytorch.yaml
+dependencies: ../../env_pytorch.yaml
 
 source: pybio.torch.transformations.normalizations.NormalizeZeroMeanUnitVariance
 optional_kwargs: {apply_to: null, eps: 1.0e-6, mean: null, std: null}
