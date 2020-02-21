@@ -10,7 +10,7 @@ with open(path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="pybio_torch",
+    name="pybio.torch",
     version="0.1a",
     description="Common torch based components for bioimage zoo",
     long_description=long_description,
