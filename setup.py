@@ -28,7 +28,7 @@ setup(
         "torch>=1.1",
         "numpy>=1.17",
         "imageio>=2.5",
-        "pybio@git+http://github.com/bioimage-io/python-bioimage-io",
+        "pybio.core @ git+http://github.com/bioimage-io/python-bioimage-io#egg=pybio.core",
     ],
     extras_require={"test": ["tox", "pytest"]},
     project_urls={  # Optional
