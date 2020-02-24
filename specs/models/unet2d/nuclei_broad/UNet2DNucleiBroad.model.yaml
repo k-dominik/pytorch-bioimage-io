@@ -8,6 +8,7 @@ authors:
   - Fynn Beuttenmüller
 documentation: UNet2DNucleiBroad.md
 tags: [unet2d, pytorch, nucleus-segmentation]
+license: MIT
 
 format_version: 0.1.0
 language: python
@@ -18,7 +19,7 @@ optional_kwargs: {input_channels: 1, output_channels: 1}
 
 test_input: null # ../test_input.npy
 test_output: null # ../test_output.npy
-thumbnail: null # ./nuclei_thumbnail.png
+covers: [] # ./nuclei_thumbnail.png
 
 # TODO double check inputs/outputs
 inputs:

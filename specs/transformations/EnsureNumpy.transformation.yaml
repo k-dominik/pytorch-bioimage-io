@@ -5,6 +5,7 @@ authors:
     - Fynn Beuttenmüller
 documentation: transformations.md
 tags: [torch, pytorch, numpy, ndarray, to, tensor]
+license: MIT
 
 format_version: 0.1.0
 language: python
