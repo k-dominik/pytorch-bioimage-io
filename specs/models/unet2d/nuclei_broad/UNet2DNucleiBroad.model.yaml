@@ -61,10 +61,10 @@ training:
 #      spec:
 #      kwargs:
     samplers:
-      - spec: https://github.com/bioimage-io/python-bioimage-io/blob/b72f9743f25367ee5d70d699551bd03013765b1f/specs/samplers/SequentialSamplerAlongDimension.sampler.yaml
+      - spec: https://github.com/bioimage-io/python-bioimage-io/blob/7bb3fa932fd62b6d00539085e59f21908b4d8d55/specs/samplers/SequentialSamplerAlongDimension.sampler.yaml
         kwargs: {sample_dimensions: [0, 0]}
         readers:
-          - spec: https://github.com/bioimage-io/python-bioimage-io/blob/b72f9743f25367ee5d70d699551bd03013765b1f/specs/readers/BroadNucleusDataBinarized.reader.yaml
+          - spec: https://github.com/bioimage-io/python-bioimage-io/blob/7bb3fa932fd62b6d00539085e59f21908b4d8d55/specs/readers/BroadNucleusDataBinarized.reader.yaml
             transformations:
               - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
                 kwargs: {apply_to: [0]}
