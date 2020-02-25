@@ -7,6 +7,7 @@ authors:
     - Constantin Pape
 documentation: transformations.md
 tags: [activation, sigmoid]
+license: MIT
 
 format_version: 0.1.0
 language: python

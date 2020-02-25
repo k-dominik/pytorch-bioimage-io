@@ -38,8 +38,8 @@ outputs:
     halo: [0, 0, 32, 32]
     shape:
       reference_input: raw
-      scale: [1, 1, 1, 1, 1]
-      offset: [0, 0, 0, 0, 0]
+      scale: [1, 1, 1, 1]
+      offset: [0, 0, 0, 0]
 
 prediction:
   preprocess:
@@ -47,7 +47,7 @@ prediction:
     - spec: ../../../transformations/Cast.transformation.yaml
       kwargs: {dtype: float32}
     - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
-    kwargs: {apply_to: [0]}
+      kwargs: {apply_to: [0]}
   weights:
       source: https://zenodo.org/record/3446812/files/unet2d_weights.torch
       hash: {md5: TODO}
