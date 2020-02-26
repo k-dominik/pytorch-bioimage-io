@@ -1,7 +1,6 @@
 name: Sigmoid
 description: Sigmoid activation function
-cite:
-    - text: TODO
+cite: []
       doi: TODO
 authors:
     - Constantin Pape
@@ -13,7 +12,7 @@ format_version: 0.1.0
 language: python
 framework: pytorch
 
-dependencies: ../../env_pytorch.yaml
+dependencies: env_pytorch.yaml
 
 source: pybio.torch.transformations.activations.Sigmoid
 optional_kwargs: {apply_to: null}

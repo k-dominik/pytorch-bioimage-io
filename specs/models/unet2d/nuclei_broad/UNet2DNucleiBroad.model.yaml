@@ -1,4 +1,4 @@
-name: UNet2DNucleiBroad
+name: 2D UNet Nuclei Broad
 description: A 2d U-Net pretrained on broad nucleus dataset.
 cite:
     - text: "Ronneberger, Olaf et al. U-net: Convolutional networks for biomedical image segmentation. MICCAI 2015."
@@ -8,6 +8,7 @@ authors:
   - Fynn Beuttenmüller
 documentation: UNet2DNucleiBroad.md
 tags: [unet2d, pytorch, nucleus-segmentation]
+license: MIT
 
 format_version: 0.1.0
 language: python
@@ -18,38 +19,39 @@ optional_kwargs: {input_channels: 1, output_channels: 1}
 
 test_input: null # ../test_input.npy
 test_output: null # ../test_output.npy
-thumbnail: null # ./nuclei_thumbnail.png
+covers: [] # ./nuclei_thumbnail.png
 
-# TODO double check inputs/outputs
 inputs:
   - name: raw
     axes: bcyx
     data_type: float32
     data_range: [-inf, inf]
-    shape: [1, 1, 128, 128]
-#        min: [1, 1, 32, 32]
-#        step: [0, 0, 32, 32]
+    shape: [1, 1, 512, 512]
+
 outputs:
-  - name: output
+  - name: logits
     axes: bcyx
     data_type: float32
-    data_range: [0, 1]
-    shape: [1, 1, 128, 128]
+    data_range: [-inf, inf]
     halo: [0, 0, 32, 32]
-#    shape:
-#        reference_input: raw
-#        scale: [1, 1, 1, 1]
-#        offset: [0, 0, 0, 0]
+    shape:
+      reference_input: raw
+      scale: [1, 1, 1, 1]
+      offset: [0, 0, 0, 0]
 
 prediction:
-    preprocess:
-        - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
-          kwargs: {apply_to: [0]}
-    weights:
-        source: https://zenodo.org/record/3446812/files/unet2d_weights.torch
-        hash: {md5: TODO}
-    postprocess: []
-    dependencies: conda:../environment.yaml
+  preprocess:
+    - spec: ../../../transformations/EnsureTorch.transformation.yaml
+    - spec: ../../../transformations/Cast.transformation.yaml
+      kwargs: {dtype: float32}
+    - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
+      kwargs: {apply_to: [0]}
+  weights:
+      source: https://zenodo.org/record/3446812/files/unet2d_weights.torch
+      hash: {md5: c16cb3ba3cb9d257550fd19067ecfb91}
+  postprocess:
+    - spec: ../../../transformations/Sigmoid.transformation.yaml
+  dependencies: conda:../environment.yaml
 
 training:
   setup:
@@ -57,10 +59,10 @@ training:
 #      spec:
 #      kwargs:
     samplers:
-      - spec: https://github.com/bioimage-io/python-bioimage-io/blob/b72f9743f25367ee5d70d699551bd03013765b1f/specs/samplers/SequentialSamplerAlongDimension.sampler.yaml
+      - spec: https://github.com/bioimage-io/python-bioimage-io/blob/7bb3fa932fd62b6d00539085e59f21908b4d8d55/specs/samplers/SequentialSamplerAlongDimension.sampler.yaml
         kwargs: {sample_dimensions: [0, 0]}
         readers:
-          - spec: https://github.com/bioimage-io/python-bioimage-io/blob/b72f9743f25367ee5d70d699551bd03013765b1f/specs/readers/BroadNucleusDataBinarized.reader.yaml
+          - spec: https://github.com/bioimage-io/python-bioimage-io/blob/7bb3fa932fd62b6d00539085e59f21908b4d8d55/specs/readers/BroadNucleusDataBinarized.reader.yaml
             transformations:
               - spec: ../../../transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
                 kwargs: {apply_to: [0]}

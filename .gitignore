@@ -1,7 +1,11 @@
 build/
 dist/
 *.egg-info/
-cache
+packages/**/*.md
+packages/**/*.torch
+packages/**/*.zip
+packages/**/env*.yaml
+
 **/tmp
 .tox/
 *.pyc
