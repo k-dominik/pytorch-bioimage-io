@@ -41,14 +41,14 @@ outputs:
 
 prediction:
   preprocess:
-    - spec: https://github.com/bioimage-io/pytorch-bioimage-io/blob/v0.1/specs/transformations/EnsureTorch.transformation.yaml
-    - spec: https://github.com/bioimage-io/pytorch-bioimage-io/blob/v0.1/specs/transformations/Cast.transformation.yaml
+    - spec: EnsureTorch.transformation.yaml
+    - spec: Cast.transformation.yaml
       kwargs: {dtype: float32}
-    - spec: https://github.com/bioimage-io/pytorch-bioimage-io/blob/v0.1/specs/transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
+    - spec: NormalizeZeroMeanUnitVariance.transformation.yaml
       kwargs: {apply_to: [0]}
   weights:
       source: unet2d_weights.torch
       hash: {md5: c16cb3ba3cb9d257550fd19067ecfb91}
   postprocess:
-    - spec: https://github.com/bioimage-io/pytorch-bioimage-io/blob/v0.1/specs/transformations/Sigmoid.transformation.yaml
-  dependencies: conda:../environment.yaml
+    - spec: Sigmoid.transformation.yaml
+  dependencies: conda:env_pytorch.yaml

@@ -1,9 +1,10 @@
 build/
 dist/
 *.egg-info/
-model_packages/*.md
-model_packages/*.torch
-model_packages/*.zip
+packages/**/*.md
+packages/**/*.torch
+packages/**/*.zip
+packages/**/env*.yaml
 
 **/tmp
 .tox/
