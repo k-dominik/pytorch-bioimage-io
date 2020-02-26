@@ -1,7 +1,10 @@
 build/
 dist/
 *.egg-info/
-cache
+model_packages/*.md
+model_packages/*.torch
+model_packages/*.zip
+
 **/tmp
 .tox/
 *.pyc
