@@ -1,7 +1,6 @@
 name: Sigmoid
 description: Sigmoid activation function
 cite: []
-      doi: TODO
 authors:
     - Constantin Pape
 documentation: transformations.md
