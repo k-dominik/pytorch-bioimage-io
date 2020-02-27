@@ -1,0 +1,19 @@
+name: EnsureNumpy
+description: Converts `torch.Tensor` to `numpy.ndarray`, pipes `numpy.ndarray` through
+cite: []
+authors:
+    - Fynn Beuttenmüller
+documentation: transformations.md
+tags: [torch, pytorch, numpy, ndarray, to, tensor]
+license: MIT
+
+format_version: 0.1.0
+language: python
+framework: pytorch
+
+dependencies: env_pytorch.yaml
+source: pybio.torch.transformations.generic.EnsureNumpy
+optional_kwargs: {apply_to: null}
+
+inputs: any
+outputs: same

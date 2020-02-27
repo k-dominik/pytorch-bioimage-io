@@ -5,6 +5,8 @@ packages/**/*.md
 packages/**/*.torch
 packages/**/*.zip
 packages/**/env*.yaml
+packages/**/*.png
+packages/**/*.npy
 
 **/tmp
 .tox/

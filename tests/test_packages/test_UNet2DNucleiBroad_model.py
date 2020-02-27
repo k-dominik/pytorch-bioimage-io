@@ -1,6 +1,6 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import List, Optional, Sequence
+from typing import List, Optional
 from zipfile import ZipFile
 
 import pytest
@@ -43,4 +43,4 @@ def test_eval_model_zip(unet_2d_nuclei_broad_package_bytes, cache_path):
     with ZipFile(unet_2d_nuclei_broad_package_bytes) as zf:
         model = eval_model_zip(zf, cache_path=cache_path)
 
-    assert model
+    assert model  # todo: improve test_eval_model_zip

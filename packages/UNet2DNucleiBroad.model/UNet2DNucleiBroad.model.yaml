@@ -17,9 +17,9 @@ framework: pytorch
 source: pybio.torch.models.unet.UNet2d
 optional_kwargs: {input_channels: 1, output_channels: 1}
 
-test_input: null # ../test_input.npy
-test_output: null # ../test_output.npy
-covers: [] # ./nuclei_thumbnail.png
+test_input: test_input.npy
+test_output: test_output.npy
+covers: [cover0.png]
 
 inputs:
   - name: raw
@@ -51,4 +51,5 @@ prediction:
       hash: {md5: c16cb3ba3cb9d257550fd19067ecfb91}
   postprocess:
     - spec: Sigmoid.transformation.yaml
+    - spec: EnsureNumpy.transformation.yaml
   dependencies: conda:env_pytorch.yaml
