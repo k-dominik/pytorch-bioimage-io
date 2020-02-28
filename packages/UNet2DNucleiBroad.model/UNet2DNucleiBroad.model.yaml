@@ -17,10 +17,6 @@ framework: pytorch
 source: pybio.torch.models.unet.UNet2d
 optional_kwargs: {input_channels: 1, output_channels: 1}
 
-test_input: test_input.npy
-test_output: test_output.npy
-covers: [cover0.png]
-
 inputs:
   - name: raw
     axes: bcyx

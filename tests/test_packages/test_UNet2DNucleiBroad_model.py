@@ -9,7 +9,7 @@ from pybio.spec.utils import cache_uri, get_instance, load_model
 
 MODEL_EXTENSIONS = (".model.yaml", ".model.yml")
 UNET_2D_NUCLEI_BROAD_PACKAGE_URL = (
-    "https://github.com/bioimage-io/pytorch-bioimage-io/releases/download/v0.1/UNet2DNucleiBroad.model.zip"
+    "https://github.com/bioimage-io/pytorch-bioimage-io/releases/download/v0.1.1/UNet2DNucleiBroad.model.zip"
 )
 
 
