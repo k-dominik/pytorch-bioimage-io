@@ -6,8 +6,8 @@ from zipfile import ZipFile
 import pytest
 
 from pybio.spec.utils import cache_uri, get_instance, load_model
-from tiktorch.server.reader import MODEL_EXTENSIONS
 
+MODEL_EXTENSIONS = (".model.yaml", ".model.yml")
 UNET_2D_NUCLEI_BROAD_PACKAGE_URL = (
     "https://github.com/bioimage-io/pytorch-bioimage-io/releases/download/v0.1/UNet2DNucleiBroad.model.zip"
 )
