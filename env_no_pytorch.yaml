@@ -6,5 +6,7 @@ channels:
 dependencies:
     # TODO pin versions
     - scipy
-    - sckit-image
+    - scikit-image
     - imageio
+    - pyyaml
+    - pytest

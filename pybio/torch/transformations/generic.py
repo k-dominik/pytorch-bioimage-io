@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Optional
 
 import numpy
 import torch
@@ -44,3 +44,23 @@ class EnsureNumpy(PyBioTorchTransformation):
             return tensor.detach().cpu().numpy()
         else:
             return tensor
+
+
+class AverageChannels(PyBioTorchTransformation):
+    """
+    Average tensor along channel axis.
+    """
+
+    def __init__(self, start_channel: Optional[int], stop_channel: Optional[int], **super_kwargs):
+        super().__init__(**super_kwargs)
+        self.start_channel = start_channel
+        self.stop_channel = stop_channel
+
+    def apply_to_chosen(self, tensor: torch.Tensor) -> torch.Tensor:
+        n_channels = tensor.shape[1]
+        start_channel = 0 if self.start_channel is None else self.start_channel
+        stop_channel = n_channels if self.stop_channel is None else self.stop_channel
+        if start_channel >= stop_channel or stop_channel > n_channels:
+            raise ValueError("Invalid channel range in pybio.torch.transformation.AverageChannels")
+        slice_ = numpy.s_[:, start_channel:stop_channel]
+        return torch.mean(tensor[slice_], 1, keepdim=True)
