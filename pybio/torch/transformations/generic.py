@@ -52,7 +52,7 @@ class AverageChannels(PyBioTorchTransformation):
     """
 
     def __init__(self, start_channel: Optional[int], stop_channel: Optional[int], **super_kwargs):
-        super().__init__()
+        super().__init__(**super_kwargs)
         self.start_channel = start_channel
         self.stop_channel = stop_channel
 
