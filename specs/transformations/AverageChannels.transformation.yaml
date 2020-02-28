@@ -1,0 +1,19 @@
+name: AverageChannels
+description: Average tensor along channel axis.
+cite: []
+authors:
+    - Constantin Pape
+documentation: transformations.md
+tags: [torch, pytorch, channels]
+license: MIT
+
+format_version: 0.1.0
+language: python
+framework: pytorch
+
+dependencies: ../../env_pytorch.yaml
+source: pybio.torch.transformations.generic.AverageChannels
+optional_kwargs: {apply_to: null, start_channel: null, stop_channel: null}
+
+inputs: dynamic
+outputs: dynamic
