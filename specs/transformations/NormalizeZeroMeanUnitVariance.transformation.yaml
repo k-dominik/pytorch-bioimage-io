@@ -6,7 +6,7 @@ cite:
 authors:
     - Constantin Pape
 documentation: transformations.md
-tags: [activation, sigmoid]
+tags: [normalization, mean, variance]
 license: MIT
 
 format_version: 0.1.0
