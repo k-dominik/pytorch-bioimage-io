@@ -1,3 +1,4 @@
+import numpy
 import torch
 import torch.nn as nn
 
@@ -49,6 +50,18 @@ class UNet2d(nn.Module):
     def forward(self, input):
         x = input
 
+        if not self.training:
+            # preprocessing:
+            if isinstance(x, numpy.ndarray):
+                x = torch.from_numpy(x.astype("float32"))
+            elif isinstance(x, torch.Tensor):
+                x = x.type("float32")
+            else:
+                raise TypeError(type(x))
+
+            # normalization
+            return (x - x.mean()) / (x.std() + 1.0e-6)
+
         from_encoder = []
         for encoder, sampler in zip(self.encoders, self.downsamplers):
             x = encoder(x)
@@ -63,4 +76,9 @@ class UNet2d(nn.Module):
             x = decoder(x)
 
         x = self.output(x)
+        if not self.training:
+            # postprocessing
+            x = torch.sigmoid(x)
+            x = x.detach().cpu().numpy()
+
         return x
