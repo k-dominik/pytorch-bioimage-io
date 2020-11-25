@@ -1,9 +1,2 @@
 models:
     - specs/models/unet2d/nuclei_broad/UNet2DNucleiBroad.model.yaml
-transformations:
-    - specs/transformations/AverageChannels.transformation.yaml
-    - specs/transformations/BCELoss.transformation.yaml
-    - specs/transformations/NormalizeZeroMeanUnitVariance.transformation.yaml
-    - specs/transformations/Sigmoid.transformation.yaml
-    - specs/transformations/EnsureTorch.transformation.yaml
-    - specs/transformations/EnsureNumpy.transformation.yaml

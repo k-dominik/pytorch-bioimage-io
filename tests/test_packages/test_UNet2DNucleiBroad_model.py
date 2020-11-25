@@ -5,7 +5,7 @@ from zipfile import ZipFile
 
 import pytest
 
-from pybio.spec.utils import cache_uri, get_instance, load_model
+from pybio.spec.utils import cache_uri, get_instance, load_model_config
 
 MODEL_EXTENSIONS = (".model.yaml", ".model.yml")
 UNET_2D_NUCLEI_BROAD_PACKAGE_URL = (
@@ -29,14 +29,14 @@ def eval_model_zip(model_zip: ZipFile, cache_path: Path):
 
         model_zip.extractall(temp_path)
         spec_file_str = guess_model_path([str(file_name) for file_name in temp_path.glob("*")])
-        pybio_model = load_model(spec_file_str, root_path=temp_path, cache_path=cache_path)
+        pybio_model = load_model_config(spec_file_str, root_path=temp_path, cache_path=cache_path)
 
         return get_instance(pybio_model)
 
 
 @pytest.fixture
 def unet_2d_nuclei_broad_package_bytes(cache_path):
-    return cache_uri(uri_str=UNET_2D_NUCLEI_BROAD_PACKAGE_URL, hash={}, cache_path=cache_path)
+    return cache_uri(uri_str=UNET_2D_NUCLEI_BROAD_PACKAGE_URL)
 
 
 def test_eval_model_zip(unet_2d_nuclei_broad_package_bytes, cache_path):

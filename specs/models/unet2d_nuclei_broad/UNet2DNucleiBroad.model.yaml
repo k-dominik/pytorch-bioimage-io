@@ -1,9 +1,8 @@
-language: python
-framework: pytorch
+# TODO physical scale of the data
 format_version: 0.3.0
 
-name: UNet 2D
-description: A 2d U-Net.
+name: UNet 2D Nuclei Broad
+description: A 2d U-Net trained on the nuclei broad dataset.
 authors:
   - Constantin Pape;@bioimage-io
   - Fynn Beuttenmüller
@@ -12,20 +11,32 @@ cite:
   - text: "Ronneberger, Olaf et al. U-net: Convolutional networks for biomedical image segmentation. MICCAI 2015."
     doi: https://doi.org/10.1007/978-3-319-24574-4_28
 
-documentation: UNet2md
+
 git_repo: https://github.com/bioimage-io/pytorch-bioimage-io/tree/master/specs/models/unet2d
-tags: [unet2d, pytorch, nucleus-segmentation]
+tags: [unet2d, pytorch]
 license: MIT
+
+documentation: UNet2DNucleiBroad.md
+covers: []  # todo unet 2d arch image
+attachments: {}
+timestamp: 2019-12-11T12:22:32Z  # ISO 8601
 
 inputs:
   - name: raw
+    description: raw input
     axes: bcyx
     data_type: float32
     data_range: [-inf, inf]
     shape: [1, 1, 512, 512]
+    preprocessing:
+      - name: zero_mean_unit_variance
+        kwargs:
+          mode: per_sample
+          axes: yx
 
 outputs:
-  - name: membrane probability
+  - name: probability
+    description: probability in [0,1]
     axes: bcyx
     data_type: float32
     data_range: [-inf, inf]
@@ -35,22 +46,24 @@ outputs:
       scale: [1, 1, 1, 1]
       offset: [0, 0, 0, 0]
 
-test_inputs: test_inputs.npy
-test_outputs: test_outputs.npy
+language: python
+framework: pytorch
 
-model:
-  source: pybio.torch.models.unet.UNet2d
-  kwargs: {input_channels: 1, output_channels: 1}
-  covers: []  # todo unet 2d arch image
-  dependencies: conda:../environment.yaml
+source: pybio.torch.models.unet2d.UNet2d
+kwargs: {input_channels: 1, output_channels: 1}
+dependencies: conda:../environment.yaml
 
 weights:
- - id: default
+ pytorch_state_dict:
+   id: default
    name: Nuclei Broad v0
    description: Trained on broad nucleus dataset.
    authors: [Constantin Pape;@bioimage-io]
    covers: [cover0.png]
-   source: https://zenodo.org/record/3446812/files/unet2d_weights.torch
+   documentation: UNet2.md
    sha256: e4d3885bccbe41cbf6c1d825f3cd2b707c7021ead5593156007e407a16b27cf2
-   framework: pytorch
-   requires_model_source: true
+   source: https://zenodo.org/record/3446812/files/unet2d_weights.torch
+   test_inputs: [test_inputs.npy]
+   test_outputs: [test_outputs.npy]
+   attachments: {}
+   tags: [nucleus-segmentation]

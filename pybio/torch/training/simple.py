@@ -15,12 +15,12 @@ except ImportError:
     trange = range
 
 
-from pybio.spec.nodes import Model
+from pybio.spec.nodes import ModelWithKwargs
 from pybio.torch.transformations import apply_transformations
 
 
 def simple_training(
-    pybio_model: Model, n_iterations: int, batch_size: int, num_workers: int, out_file: Union[str, Path, IO[bytes]]
+    pybio_model: ModelWithKwargs, n_iterations: int, batch_size: int, num_workers: int, out_file: Union[str, Path, IO[bytes]]
 ) -> torch.nn.Module:
     """ Simplified training loop.
     """
