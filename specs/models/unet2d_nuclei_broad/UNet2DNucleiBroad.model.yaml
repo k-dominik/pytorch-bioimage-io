@@ -61,6 +61,9 @@ source: pybio.torch.models.unet2d.UNet2d
 kwargs: {input_channels: 1, output_channels: 1}
 dependencies: conda:../environment.yaml
 
+test_inputs: [test_inputs.npy]
+test_outputs: [test_outputs.npy]
+
 weights:
  pytorch_state_dict:
    id: default
@@ -71,7 +74,5 @@ weights:
    documentation: UNet2.md
    sha256: e4d3885bccbe41cbf6c1d825f3cd2b707c7021ead5593156007e407a16b27cf2
    source: https://zenodo.org/record/3446812/files/unet2d_weights.torch
-   test_inputs: [test_inputs.npy]
-   test_outputs: [test_outputs.npy]
    attachments: {}
    tags: [nucleus-segmentation]
