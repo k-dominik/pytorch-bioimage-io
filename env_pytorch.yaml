@@ -1,14 +1,16 @@
 name:
-    torch_resources_pytorch
+    pybio_torch
 channels:
     - pytorch
     - conda-forge
     - defaults
 dependencies:
     # TODO pin versions
-    - scipy
-    - scikit-image
     - imageio
-    - pytorch >=1.0
-    - pyyaml
+    - marshmallow
     - pytest
+    - python >=3.7.2
+    - pytorch >=1.4
+    - ruamel.yaml
+    - scikit-image
+    - scipy
