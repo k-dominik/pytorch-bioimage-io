@@ -13,4 +13,5 @@ dependencies:
     - pytorch >=1.4
     - ruamel.yaml
     - scikit-image
+    - scikit-learn
     - scipy
