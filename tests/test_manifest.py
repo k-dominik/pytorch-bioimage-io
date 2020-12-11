@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from pybio.spec import load_spec_and_kwargs, utils
+from pybio.spec import utils, load_and_resolve_spec
 
 MANIFEST_PATH = Path(__file__).parent.parent / "manifest.yaml"
 
@@ -19,28 +19,12 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize("category,spec_path", categories_and_spec_paths)
 
 
-@pytest.fixture
-def required_kwargs():
-    local_pybio_path = Path(__file__).parent.parent
-    kwargs = yaml.safe_load(
-        f"""{{}}
-    """
-    )
 
-    # testing the test data...
-    for spec_path in kwargs:
-        if not (MANIFEST_PATH.parent / spec_path).exists():
-            raise FileNotFoundError(spec_path)
-
-    return kwargs
-
-
-def test_load_specs_from_manifest(cache_path, category, spec_path, required_kwargs):
-    kwargs = required_kwargs.get(spec_path, {})
+def test_load_specs_from_manifest(cache_path, category, spec_path):
 
     spec_path = MANIFEST_PATH.parent / spec_path
     assert spec_path.exists()
 
-    loaded_spec = load_spec_and_kwargs(str(spec_path), kwargs=kwargs, cache_path=cache_path)
+    loaded_spec = load_and_resolve_spec(str(spec_path))
     instance = utils.get_instance(loaded_spec)
     assert instance
