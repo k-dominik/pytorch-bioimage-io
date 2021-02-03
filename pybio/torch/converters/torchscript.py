@@ -25,6 +25,8 @@ def convert_weights_to_torchscript(
 
         # instantiate and trace the model
         model = get_instance(spec)
+        state = torch.load(spec.weights['pytorch_state_dict'].source)
+        model.load_state_dict(state)
         if use_tracing:
             scripted_model = torch.jit.trace(model, input_data)
         else:

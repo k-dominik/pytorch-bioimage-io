@@ -26,6 +26,8 @@ def convert_weights_to_onnx(
 
         # instantiate and convert the model
         model = get_instance(spec)
+        state = torch.load(spec.weights['pytorch_state_dict'].source)
+        model.load_state_dict(state)
         torch.onnx.export(model, input_data, output_path)
 
         # TODO check the onnx model
