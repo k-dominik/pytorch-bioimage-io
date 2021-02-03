@@ -55,7 +55,7 @@ class UNet2d(nn.Module):
             if isinstance(x, numpy.ndarray):
                 x = torch.from_numpy(x.astype("float32"))
             elif isinstance(x, torch.Tensor):
-                x = x.type("float32")
+                x = x.type(torch.float32)
             else:
                 raise TypeError(type(x))
 
