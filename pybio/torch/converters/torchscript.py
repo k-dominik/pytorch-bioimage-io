@@ -1,8 +1,14 @@
+import argparse
+import os
+import sys
+import warnings
+
 from pathlib import Path
 from typing import Union
 
 import numpy as np
 import torch
+from numpy.testing import assert_array_almost_equal
 
 from pybio.spec.utils.transformers import load_and_resolve_spec
 from pybio.spec.utils import get_instance
@@ -37,16 +43,31 @@ def convert_weights_to_torchscript(
             scripted_model = torch.jit.script(model)
 
         # check the scripted model
-        output_data = scripted_model(input_data).numpy()
-        if not np.allclose(expected_output, output_data):
-            raise RuntimeError
+        output = scripted_model(input_data).numpy()
 
     # save the torchscript model
     scripted_model.save(output_path)
 
+    try:
+        assert_array_almost_equal(expected_output, output, decimal=4)
+        return 0
+    except AssertionError as e:
+        msg = f"The onnx weights were exported, but results before and after conversion do not agree:\n {str(e)}"
+        warnings.warn(msg)
+        return 1
 
-# TODO expose this as CLI
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model", "-m", required=True)
+    parser.add_argument("--output", "-o", required=True)
+    parser.add_argument("--tracing", "-t", default=1, type=int)
+
+    args = parser.parse_args()
+    return convert_weights_to_torchscript(os.path.abspath(args.model),
+                                          args.output,
+                                          bool(args.tracing))
+
+
 if __name__ == '__main__':
-    path = '/home/pape/Work/bioimageio/pytorch-bioimage-io/specs/models/unet2d_nuclei_broad/UNet2DNucleiBroad.model.yaml'
-    out_path = './test.pt'
-    convert_weights_to_torchscript(path, out_path)
+    sys.exit(main())
