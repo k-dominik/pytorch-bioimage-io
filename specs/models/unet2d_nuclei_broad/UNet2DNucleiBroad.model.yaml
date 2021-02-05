@@ -72,3 +72,9 @@ weights:
    authors: [Constantin Pape;@bioimage-io]
    sha256: e4d3885bccbe41cbf6c1d825f3cd2b707c7021ead5593156007e407a16b27cf2
    source: https://zenodo.org/record/3446812/files/unet2d_weights.torch
+onnx:
+    sha256: 6d180e39527789d8a17b39a6eb78405bdeb58c3e6c2cf8d5a2c6dcc3ac5dcc7f
+    source: ./weights.onnx
+pytorch_script:
+    sha256: e8030c9740d31e0d0d246db16b04739c1b3d4c947864e9bb90f7b298d7fb7ec2
+    source: ./weights.torchscript

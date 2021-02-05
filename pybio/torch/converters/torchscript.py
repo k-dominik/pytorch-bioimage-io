@@ -21,12 +21,16 @@ def convert_weights_to_torchscript(
         # load input and expected output data
         input_data = np.load(spec.test_inputs[0]).astype('float32')
         input_data = torch.from_numpy(input_data)
-        expected_output_data = np.load(spec.test_outputs[0]).astype(np.float32)
 
-        # instantiate and trace the model
+        # instantiate model and get reference output
         model = get_instance(spec)
         state = torch.load(spec.weights['pytorch_state_dict'].source)
         model.load_state_dict(state)
+
+        # get the expected output to validate the torchscript weights
+        expected_output = model(input_data)
+
+        # make scripted model
         if use_tracing:
             scripted_model = torch.jit.trace(model, input_data)
         else:
@@ -34,7 +38,7 @@ def convert_weights_to_torchscript(
 
         # check the scripted model
         output_data = scripted_model(input_data).numpy()
-        if not np.allclose(expected_output_data, output_data):
+        if not np.allclose(expected_output, output_data):
             raise RuntimeError
 
     # save the torchscript model
