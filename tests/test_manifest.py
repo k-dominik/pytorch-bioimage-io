@@ -25,6 +25,6 @@ def test_load_specs_from_manifest(cache_path, category, spec_path):
     spec_path = MANIFEST_PATH.parent / spec_path
     assert spec_path.exists()
 
-    loaded_spec = load_and_resolve_spec(str(spec_path))
+    loaded_spec = load_and_resolve_spec(spec_path)
     instance = utils.get_instance(loaded_spec)
     assert instance
