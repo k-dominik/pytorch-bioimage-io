@@ -6,7 +6,7 @@ from zipfile import ZipFile
 
 import pytest
 
-from pybio.spec.utils import get_instance
+from bioimageio.spec.utils import get_instance
 
 MODEL_EXTENSIONS = (".model.yaml", ".model.yml")
 UNET_2D_NUCLEI_BROAD_PACKAGE_URL = (
@@ -30,6 +30,6 @@ def eval_model_zip(model_zip: ZipFile, cache_path: Path):
 
         model_zip.extractall(temp_path)
         spec_file_str = guess_model_path([str(file_name) for file_name in temp_path.glob("*")])
-        pybio_model = load_model_config(spec_file_str, root_path=temp_path, cache_path=cache_path)
+        bioimageio_model = load_model_config(spec_file_str, root_path=temp_path, cache_path=cache_path)
 
-        return get_instance(pybio_model)
+        return get_instance(bioimageio_model)

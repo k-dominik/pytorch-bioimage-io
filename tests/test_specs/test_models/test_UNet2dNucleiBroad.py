@@ -4,9 +4,9 @@ from io import BytesIO
 import numpy
 import torch
 
-from pybio.spec import load_and_resolve_spec, load_model_spec, utils
-from pybio.spec.raw_nodes import URI
-from pybio.spec.utils import get_instance
+from bioimageio.spec import load_and_resolve_spec, load_model_spec, utils
+from bioimageio.spec.raw_nodes import URI
+from bioimageio.spec.utils import get_instance
 
 
 # def test_UNet2dNucleiBroads():

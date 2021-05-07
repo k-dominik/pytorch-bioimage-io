@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from pybio.spec import utils, load_and_resolve_spec
+from bioimageio.spec import utils, load_and_resolve_spec
 
 MANIFEST_PATH = Path(__file__).parent.parent / "manifest.yaml"
 
@@ -20,7 +20,7 @@ def pytest_generate_tests(metafunc):
 
 
 
-def test_load_specs_from_manifest(cache_path, category, spec_path):
+def test_load_specs_from_manifest(category, spec_path):
 
     spec_path = MANIFEST_PATH.parent / spec_path
     assert spec_path.exists()

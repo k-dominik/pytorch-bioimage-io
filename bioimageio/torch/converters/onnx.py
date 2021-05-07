@@ -10,8 +10,8 @@ import numpy as np
 import torch
 from numpy.testing import assert_array_almost_equal
 
-from pybio.spec.utils.transformers import load_and_resolve_spec
-from pybio.spec.utils import get_instance
+from bioimageio.spec.utils.transformers import load_and_resolve_spec
+from bioimageio.spec.utils import get_instance
 
 
 def convert_weights_to_onnx(
