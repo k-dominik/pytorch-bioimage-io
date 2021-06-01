@@ -19,7 +19,6 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize("category,spec_path", categories_and_spec_paths)
 
 
-
 def test_load_specs_from_manifest(category, spec_path):
 
     spec_path = MANIFEST_PATH.parent / spec_path
