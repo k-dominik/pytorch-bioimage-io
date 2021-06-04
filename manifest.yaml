@@ -1,2 +1,9 @@
-models:
-    - specs/models/unet2d_nuclei_broad/UNet2DNucleiBroad.model.yaml
+format_version: 0.2.0
+
+model:
+  - id: UNet2DNucleiBroad
+    source: https://raw.githubusercontent.com/bioimage-io/pytorch-bioimage-io/master/specs/models/unet2d_nuclei_broad/UNet2DNucleiBroad.model.yaml
+    links:
+      - Ilastik
+      - imjoy/BioImageIO-Packager
+    download_url: https://github.com/bioimage-io/pytorch-bioimage-io/releases/download/v0.3.0/UNet2DNucleiBroad.model.zip  # todo: update
