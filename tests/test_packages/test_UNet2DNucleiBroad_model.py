@@ -1,11 +1,9 @@
-import requests
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import List, Optional
 from zipfile import ZipFile
 
-import pytest
-
+from bioimageio.spec import load_and_resolve_spec
 from bioimageio.spec.utils import get_instance
 
 MODEL_EXTENSIONS = (".model.yaml", ".model.yml")
@@ -22,14 +20,11 @@ def guess_model_path(file_names: List[str]) -> Optional[str]:
     return None
 
 
-def eval_model_zip(model_zip: ZipFile, cache_path: Path):
+def eval_model_zip(model_zip: ZipFile):
     with TemporaryDirectory() as tempdir:
         temp_path = Path(tempdir)
-        if cache_path is None:
-            cache_path = temp_path / "cache"
-
         model_zip.extractall(temp_path)
         spec_file_str = guess_model_path([str(file_name) for file_name in temp_path.glob("*")])
-        bioimageio_model = load_model_config(spec_file_str, root_path=temp_path, cache_path=cache_path)
+        bioimageio_model = load_and_resolve_spec(spec_file_str)
 
         return get_instance(bioimageio_model)
