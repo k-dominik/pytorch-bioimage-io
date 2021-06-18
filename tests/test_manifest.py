@@ -2,6 +2,7 @@ from ruamel.yaml import YAML
 
 from bioimageio.spec.__main__ import verify_bioimageio_manifest_data
 
+
 yaml = YAML(typ="safe")
 
 
