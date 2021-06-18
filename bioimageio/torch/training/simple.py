@@ -15,7 +15,7 @@ except ImportError:
     trange = range
 
 
-from bioimageio.spec.nodes import ModelWithKwargs
+from bioimageio.spec.raw_nodes import ModelWithKwargs
 from bioimageio.torch.transformations import apply_transformations
 
 
