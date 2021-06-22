@@ -6,7 +6,7 @@ import torch
 
 from bioimageio.spec import load_model, load_model_spec, utils
 from bioimageio.spec.raw_nodes import URI
-from bioimageio.spec.utils import get_instance
+from bioimageio.spec.utils import get_nn_instance
 
 
 # def test_UNet2dNucleiBroads():

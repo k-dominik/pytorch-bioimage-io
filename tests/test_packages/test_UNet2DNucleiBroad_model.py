@@ -4,7 +4,7 @@ from typing import List, Optional
 from zipfile import ZipFile
 
 from bioimageio.spec import load_and_resolve_spec
-from bioimageio.spec.utils import get_instance
+from bioimageio.spec.utils import get_nn_instance
 
 MODEL_EXTENSIONS = (".model.yaml", ".model.yml")
 UNET_2D_NUCLEI_BROAD_PACKAGE_URL = (
@@ -27,4 +27,4 @@ def eval_model_zip(model_zip: ZipFile):
         spec_file_str = guess_model_path([str(file_name) for file_name in temp_path.glob("*")])
         bioimageio_model = load_and_resolve_spec(spec_file_str)
 
-        return get_instance(bioimageio_model)
+        return get_nn_instance(bioimageio_model)

@@ -4,7 +4,7 @@ from pathlib import Path
 from torch.utils.data import DataLoader
 from typing import Union, IO
 
-from bioimageio.spec.utils import get_instance
+from bioimageio.spec.utils import get_nn_instance
 
 try:
     from tqdm import trange
@@ -28,18 +28,18 @@ def simple_training(
         out_file = Path(out_file)
         out_file.parent.mkdir(exist_ok=True)
 
-    model = get_instance(bioimageio_model)
+    model = get_nn_instance(bioimageio_model)
 
     # instantiate all training parameters from the training config
     setup = bioimageio_model.spec.training.setup
 
-    sampler = get_instance(setup.sampler)
+    sampler = get_nn_instance(setup.sampler)
 
-    preprocess = [get_instance(prep) for prep in setup.preprocess]
-    postprocess = [get_instance(post) for post in setup.postprocess]
+    preprocess = [get_nn_instance(prep) for prep in setup.preprocess]
+    postprocess = [get_nn_instance(post) for post in setup.postprocess]
 
-    losses = [get_instance(loss_prep) for loss_prep in setup.losses]
-    optimizer = get_instance(setup.optimizer, params=model.parameters())
+    losses = [get_nn_instance(loss_prep) for loss_prep in setup.losses]
+    optimizer = get_nn_instance(setup.optimizer, params=model.parameters())
 
     # build the data-loader from our sampler
     loader = DataLoader(sampler, shuffle=True, num_workers=num_workers, batch_size=batch_size)
