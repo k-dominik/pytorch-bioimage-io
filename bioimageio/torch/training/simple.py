@@ -4,7 +4,7 @@ from pathlib import Path
 from torch.utils.data import DataLoader
 from typing import Union, IO
 
-from pybio.spec.utils import get_instance
+from bioimageio.spec.utils import get_instance
 
 try:
     from tqdm import trange
@@ -15,12 +15,12 @@ except ImportError:
     trange = range
 
 
-from pybio.spec.nodes import ModelWithKwargs
-from pybio.torch.transformations import apply_transformations
+from bioimageio.spec.raw_nodes import ModelWithKwargs
+from bioimageio.torch.transformations import apply_transformations
 
 
 def simple_training(
-    pybio_model: ModelWithKwargs, n_iterations: int, batch_size: int, num_workers: int, out_file: Union[str, Path, IO[bytes]]
+    bioimageio_model: ModelWithKwargs, n_iterations: int, batch_size: int, num_workers: int, out_file: Union[str, Path, IO[bytes]]
 ) -> torch.nn.Module:
     """ Simplified training loop.
     """
@@ -28,10 +28,10 @@ def simple_training(
         out_file = Path(out_file)
         out_file.parent.mkdir(exist_ok=True)
 
-    model = get_instance(pybio_model)
+    model = get_instance(bioimageio_model)
 
     # instantiate all training parameters from the training config
-    setup = pybio_model.spec.training.setup
+    setup = bioimageio_model.spec.training.setup
 
     sampler = get_instance(setup.sampler)
 

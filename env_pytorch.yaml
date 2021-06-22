@@ -1,5 +1,5 @@
 name:
-    pybio_torch
+    bioimageio_torch
 channels:
     - pytorch
     - conda-forge

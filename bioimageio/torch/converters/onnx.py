@@ -10,8 +10,8 @@ import numpy as np
 import torch
 from numpy.testing import assert_array_almost_equal
 
-from pybio.spec.utils.transformers import load_and_resolve_spec
-from pybio.spec.utils import get_instance
+from bioimageio.spec.utils.transformers import load_model
+from bioimageio.spec.utils import get_instance
 
 
 def convert_weights_to_onnx(
@@ -30,7 +30,7 @@ def convert_weights_to_onnx(
         use_tracing: whether to use tracing or scripting to export the onnx format
         verbose: be verbose during the onnx export
     """
-    spec = load_and_resolve_spec(model_yaml)
+    spec = load_model(model_yaml)
 
     with torch.no_grad():
         # load input and expected output data

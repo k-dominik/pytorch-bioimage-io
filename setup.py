@@ -6,7 +6,7 @@ from setuptools import find_namespace_packages, setup
 long_description = (Path(__file__).parent / "README.md").read_text(encoding="utf-8")
 
 setup(
-    name="pybio.torch",
+    name="bioimageio.torch",
     version="0.3a",
     description="Common torch based components for bioimage zoo",
     long_description=long_description,
@@ -23,7 +23,7 @@ setup(
     install_requires=[
         "torch>=1.4",
         "numpy>=1.17",
-        "pybio.core @ git+http://github.com/bioimage-io/python-bioimage-io#egg=pybio.core",
+        "bioimageio.core @ git+http://github.com/bioimage-io/python-bioimage-io#egg=bioimageio.core",
     ],
     extras_require={"test": ["tox", "pytest"]},
     project_urls={  # Optional
