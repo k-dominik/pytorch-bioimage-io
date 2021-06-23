@@ -4,7 +4,7 @@ from io import BytesIO
 import numpy
 import torch
 
-from bioimageio.spec import load_model, load_model_spec, utils
+from bioimageio.spec import load_model, utils
 from bioimageio.spec.raw_nodes import URI
 from bioimageio.spec.utils import get_nn_instance
 
