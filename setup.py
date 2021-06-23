@@ -21,9 +21,10 @@ setup(
     ],
     packages=find_namespace_packages(exclude=["tests"]),  # Required
     install_requires=[
-        "torch>=1.4",
+        "pytorch>=1.4",
         "numpy>=1.17",
-        "bioimageio.core @ git+http://github.com/bioimage-io/python-bioimage-io#egg=bioimageio.core",
+        "bioimageio.spec",
+        "click<8"
     ],
     extras_require={"test": ["tox", "pytest"]},
     project_urls={  # Optional
