@@ -23,9 +23,7 @@ requirements:
     - {{ cpuonly }}
     {% endif %}
     {% for dep in setup_py_data['install_requires'] %}
-      {% if not dep.startswith('torch') %}
     - {{ dep.lower() }}
-      {% endif %}
     {% endfor %}
 
 
