@@ -21,7 +21,7 @@ setup(
     ],
     packages=find_namespace_packages(exclude=["tests"]),  # Required
     install_requires=[
-        "pytorch>=1.4",
+        "torch>=1.4",
         "numpy>=1.17",
         "bioimageio.spec",
         "click<8"

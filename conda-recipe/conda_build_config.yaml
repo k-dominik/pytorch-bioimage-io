@@ -1,0 +1,11 @@
+torch:
+    - pytorch >=1.4
+    - pytorch >=1.4
+
+cpuonly:
+    - none
+    - cpuonly
+
+zip_keys:
+    - torch
+    - cpuonly
